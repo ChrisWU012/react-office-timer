@@ -1,4 +1,4 @@
-import Home from './components/pages/Home';
+import Home from './pages/Home';
 
 //style
 import './App.css';
@@ -7,9 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 class="text-3xl font-bold underline">
-          Hello world!
-        </h1>
+        <Home />
       </header>
     </div>
   );
