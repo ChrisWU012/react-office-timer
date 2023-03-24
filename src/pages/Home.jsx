@@ -5,7 +5,7 @@ import { Button } from 'react-daisyui'
 //component
 import InputModal from '../components/InputModal'
 import Quotes from '../components/Quotes'
-import NestedThemes from '../components/NestedThemes'
+// import NestedThemes from '../components/NestedThemes'
 
 function Home() {
     const [showInput, setShowInput] = useState(false)
@@ -22,6 +22,9 @@ function Home() {
 
     const [salary, setSalary] = useState()
     const [showMoney, setShowMoney] = useState(false)
+
+    const [data, setData] = useState()
+    useEffect(() => { console.log("input data:", data) }, [data])
 
     useEffect(() => {
         if (startTime && endTime) {
@@ -46,11 +49,13 @@ function Home() {
 
     return (
         <div>
-            <NestedThemes />
+            {/* todo: add themes */}
+            {/* <NestedThemes /> */}
             <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>點擊開始</Button>
 
             <Quotes />
-            {showInput ? <InputModal close={() => setShowInput(false)} /> : null}
+
+            {showInput ? <InputModal close={() => setShowInput(false)} getData={setData} /> : null}
         </div>
     )
 }

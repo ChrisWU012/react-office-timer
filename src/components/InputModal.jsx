@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Button, Input } from 'react-daisyui'
 import { TimePicker } from 'react-ios-time-picker';
 
@@ -7,20 +7,29 @@ function InputModal(props) {
     const [endTime, setEndTime] = useState()
 
     const [salary, setSalary] = useState()
+
+    useEffect(() => {
+        props.getData({
+            startTime: startTime,
+            endTime: endTime,
+            salary: salary
+        })
+    },
+        [startTime, endTime, salary])
+
     return (
         <div>
             <Modal className='w-11/12 max-w-5xl' open={true}>
                 <Modal.Header className="font-bold">
-                    Congratulations random Interner user!
+                    睇下你今日搵幾錢
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div className="card w-1/2 bg-base-100 shadow-xl">
+                    <div className="card bg-base-100 shadow-xl">
                         <div className="grid grid-cols-2">
 
                             <div className="m-2">
-                                幾點返工？
-                                <TimePicker onChange={setStartTime} value={startTime} pickerDefaultValue={"08:00"} />
+                                <TimePicker placeholder={"幾點返工？"} onChange={setStartTime} value={startTime} pickerDefaultValue={"08:00"} />
                             </div>
                             <div className="m-2">
                                 幾點放工？
