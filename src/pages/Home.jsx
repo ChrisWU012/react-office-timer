@@ -4,7 +4,9 @@ import { Button } from 'react-daisyui'
 
 //component
 import InputModal from '../components/InputModal'
-import Quotes from '../components/Quotes'
+// import Quotes from '../components/Quotes'
+import CountdownTimer from '../components/CountdownTimer'
+import MoneyStat from '../components/MoneyStat'
 // import NestedThemes from '../components/NestedThemes'
 
 function Home() {
@@ -23,12 +25,29 @@ function Home() {
     const [salary, setSalary] = useState()
     const [showMoney, setShowMoney] = useState(false)
 
-    const [data, setData] = useState()
-    useEffect(() => { console.log("input data:", data) }, [data])
+    const [data, setData] = useState({})
+    useEffect(() => {
+        if (data) {
+            console.log("data", data)
+            if (data.startTime) {
+                setStartTime(data.startTime + ":00")
+            }
+            if (data.endTime) {
+                setEndTime(data.endTime + ":00")
+            }
+            if (data.salary) {
+                setSalary(data.salary)
+            }
+        }
+    }, [data])
 
     useEffect(() => {
         if (startTime && endTime) {
-            const cur_time = new Date(), curr_hour = cur_time.getHours(), curr_min = cur_time.getMinutes(), curr_sec = cur_time.getSeconds(), arr1 = startTime.split(':'), arr2 = endTime.split(':');
+            const cur_time = new Date()
+            var curr_hour = cur_time.getHours()
+            var curr_min = cur_time.getMinutes()
+            var curr_sec = cur_time.getSeconds()
+            var arr2 = endTime.split(':')
 
             const difference = (arr2[0] - curr_hour) * 3600 + (arr2[1] - curr_min) * 60 + (0 - curr_sec);
 
@@ -41,21 +60,24 @@ function Home() {
             setSecs(diff_arr[2]);
 
             setShowTimer(true);
-            setShowInput(!showInput);
+            setShowInput(false);
 
             if (salary) { setShowMoney(true) }
         }
-    }, [startTime, endTime])
+    }, [startTime, endTime, salary])
 
     return (
-        <div>
+        <div className='inline-block align-middle'>
             {/* todo: add themes */}
             {/* <NestedThemes /> */}
-            <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>點擊開始</Button>
 
-            <Quotes />
+            {showInput ? <InputModal close={setShowInput} getData={setData} /> : null}
+            {showMoney ? <MoneyStat salary={salary} startTime={startTime} endTime={endTime} currentTime={currentTime} /> : null}
+            {showTimer ? <CountdownTimer hours={hours} mins={mins} secs={secs} endTime={endTime} /> :
+                <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>點擊開始</Button>}
 
-            {showInput ? <InputModal close={() => setShowInput(false)} getData={setData} /> : null}
+
+            {/* <Quotes /> */}
         </div>
     )
 }

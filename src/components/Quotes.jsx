@@ -13,7 +13,7 @@ function Quotes() {
     }, []);
 
     return (
-        <div className="carousel w-full" style={{ width: "500px" }}>
+        <div className="carousel w-full" style={{ width: "500px", height: "100px" }}>
             {QuoteList.map((quote, index) => (
                 <div
                     key={index}

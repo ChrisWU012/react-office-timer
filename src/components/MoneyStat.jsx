@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import animateValue from '../hooks/AnimNumber'
+import { Stats } from 'react-daisyui'
 
 function MoneyStat(props) {
-    //props: salary, start time, end time, current time
+    //props: salary, startTime, endTime, currentTime
     const [total, setTotal] = useState()
 
     const [progress, setProgress] = useState(0)
@@ -60,20 +61,18 @@ function MoneyStat(props) {
     }, [currentTime]);
 
     return (
-        <div>
-            <div className="stats shadow">
-
+        <div className='m-1'>
+            <div className="stats shadow border-double border-2 border-sky-500">
                 <div className="stat place-items-center">
                     <div className="stat-title">你今日已經搵咗：</div>
-                    <div className="stat-value text-primary-focus">$ {animNum}</div>
+                    <div className="stat-value text-secondary">$ {animNum}</div>
+                    <div className="stat-desc">/ {(salary / 22).toFixed(0)}</div>
                 </div>
-
                 <div className="stat place-items-center">
-                    <div className="stat-title">每日搵：</div>
-                    <div className="stat-value">$ {(Math.round(salary / 22 * 100) / 100).toFixed(2)}</div>
+                    <div className="stat-title">每分鐘你搵緊：</div>
+                    <div className="stat-value text-primary">$ {(Math.round(salary / 22 * 100) / 100 / (endTime - startTime) * 60).toFixed(2)}</div>
                     <div className="stat-desc">以每月工作22天計算</div>
                 </div>
-
             </div>
         </div>
     )
