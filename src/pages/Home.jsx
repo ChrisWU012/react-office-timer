@@ -55,9 +55,9 @@ function Home() {
 
             setCurrentTime(`${curr_hour}:${curr_min}:${curr_sec}`);
 
-            setHours(diff_arr[0]);
-            setMins(diff_arr[1]);
-            setSecs(diff_arr[2]);
+            setHours(arr2[0]);
+            setMins(arr2[1]);
+            setSecs(arr2[2]);
 
             setShowTimer(true);
             setShowInput(false);

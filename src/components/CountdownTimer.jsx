@@ -4,33 +4,40 @@ import { Countdown } from "react-daisyui";
 
 //props: endTime, currentTime (HH:MM:SS)
 function CountdownTimer(props) {
+    var [hh, mm, ss] = getCurrentTime()
     const [totalSeconds, setTotalSeconds] = useState(0);
-    const [hours, setHours] = useState(props.hours);
-    const [minutes, setMinutes] = useState(props.mins);
-    const [seconds, setSeconds] = useState(props.secs);
+
+    const [hours, setHours] = useState(props.hours - hh);
+    const [minutes, setMinutes] = useState(props.mins - mm);
+    const [seconds, setSeconds] = useState(props.secs - ss);
     const [showConfetti, setShowConfetti] = useState(false)
 
     useEffect(() => {
-        setTotalSeconds(hours * 60 * 60 + minutes * 60 + seconds);
+        var total_seconds = props.hours * 60 * 60 + props.mins * 60 + props.secs
+        setTotalSeconds(total_seconds);
+        // setHours
     }, []);
-
-    useEffect(() => { console.log("totalSeconds: ", totalSeconds) }, [totalSeconds])
 
     useEffect(() => {
         const countdownInterval = setInterval(() => {
             if (totalSeconds > 0) {
                 setTotalSeconds(totalSeconds - 1);
-                let newHours = hours;
-                let newMinutes = minutes;
-                let newSeconds = seconds - 1;
+                const cur_time = new Date()
+                var curr_hour = cur_time.getHours()
+                var curr_min = cur_time.getMinutes()
+                var curr_sec = cur_time.getSeconds()
+
+                let newHours = props.hours - curr_hour;
+                let newMinutes = props.mins - curr_min;
+                let newSeconds = props.secs - curr_sec;
 
                 if (newSeconds < 0 && totalSeconds > 0) {
-                    newSeconds = 59;
+                    newSeconds += 60;
                     newMinutes -= 1;
                 }
 
                 if (newMinutes < 0 && newHours > 0) {
-                    newMinutes = 59;
+                    newMinutes += 60;
                     newHours -= 1;
                 }
 
@@ -44,7 +51,15 @@ function CountdownTimer(props) {
             }
         }, 1000);
         return () => clearInterval(countdownInterval);
-    }, [totalSeconds, hours, minutes, seconds]);
+    }, [totalSeconds]);
+
+    function getCurrentTime() {
+        const cur_time = new Date()
+        var curr_hour = cur_time.getHours()
+        var curr_min = cur_time.getMinutes()
+        var curr_sec = cur_time.getSeconds()
+        return [curr_hour, curr_min, curr_sec]
+    }
 
     return (
         <>
