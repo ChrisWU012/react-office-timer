@@ -8,8 +8,20 @@ function InputModal(props) {
     const [salary, setSalary] = useState()
 
     const onClose = () => {
-        props.getData({ startTime: startTime, endTime: endTime, salary: salary })
-        props.close(false)
+        const cur_time = new Date()
+        var curr_hour = cur_time.getHours()
+        var curr_min = cur_time.getMinutes()
+        var curr_sec = cur_time.getSeconds()
+        var arr1 = startTime.split(":")
+        var arr2 = endTime.split(':')
+        if ((curr_hour * 3600 + curr_min * 60 + curr_sec) > (arr2[0] * 3600 + arr2[1] * 60)) {
+            alert("你已經收咗工？")
+        } else if ((curr_hour * 3600 + curr_min * 60 + curr_sec) < (arr1[0] * 3600 + arr1[1] * 60)) {
+            alert("你仲未返工？")
+        } else {
+            props.getData({ startTime: startTime, endTime: endTime, salary: salary })
+            props.close(false)
+        }
     }
 
     return (
@@ -23,11 +35,11 @@ function InputModal(props) {
                     <div className="grid grid-cols-2">
                         <div className="m-2">
                             幾點返工？
-                            <TimePicker style={{ color: "red", backgroundColor: "red" }} placeholder={"幾點返工？"} onChange={setStartTime} value={startTime} pickerDefaultValue={"08:00"} required={true} />
+                            <TimePicker style={{ color: "red", backgroundColor: "red" }} placeholder={"幾點返工？"} onChange={setStartTime} value={startTime} pickerDefaultValue={"09:00"} required={true} />
                         </div>
                         <div className="m-2">
                             幾點放工？
-                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"13:15"} />
+                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"23:59"} />
                         </div>
                     </div>
                     <div className="flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
