@@ -49,10 +49,6 @@ function Home() {
             var curr_sec = cur_time.getSeconds()
             var arr2 = endTime.split(':')
 
-            const difference = (arr2[0] - curr_hour) * 3600 + (arr2[1] - curr_min) * 60 + (0 - curr_sec);
-
-            const diff_in_HHMMSS = new Date(difference * 1000).toISOString().slice(11, 19), diff_arr = diff_in_HHMMSS.split(':');
-
             setCurrentTime(`${curr_hour}:${curr_min}:${curr_sec}`);
 
             setHours(arr2[0]);
