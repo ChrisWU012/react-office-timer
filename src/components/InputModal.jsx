@@ -12,6 +12,10 @@ function InputModal(props) {
         var curr_hour = cur_time.getHours()
         var curr_min = cur_time.getMinutes()
         var curr_sec = cur_time.getSeconds()
+        if (!startTime || !endTime) {
+            return alert("請輪入資料")
+
+        }
         var arr1 = startTime.split(":")
         var arr2 = endTime.split(':')
         if ((curr_hour * 3600 + curr_min * 60 + curr_sec) > (arr2[0] * 3600 + arr2[1] * 60)) {
@@ -39,7 +43,7 @@ function InputModal(props) {
                         </div>
                         <div className="m-2">
                             <span className='label-text'>幾點放工？</span>
-                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"23:59"} />
+                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"13:30"} />
                         </div>
                     </div>
                     <div className="flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">

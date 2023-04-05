@@ -13,7 +13,7 @@ function CountdownTimer(props) {
     const [showConfetti, setShowConfetti] = useState(false)
 
     useEffect(() => {
-        var total_seconds = props.hours * 60 * 60 + props.mins * 60 + props.secs
+        var total_seconds = (props.hours - hh) * 60 * 60 + (props.mins - mm) * 60 + (props.secs - ss)
         setTotalSeconds(total_seconds);
         // setHours
     }, []);
@@ -32,7 +32,7 @@ function CountdownTimer(props) {
                 let newMinutes = props.mins - curr_min;
                 let newSeconds = props.secs - curr_sec;
 
-                if (newSeconds < 0 && totalSeconds > 0) {
+                if (newSeconds < 0 && totalSeconds > 1) {
                     newSeconds += 60;
                     newMinutes -= 1;
                 }

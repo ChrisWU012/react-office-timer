@@ -69,7 +69,7 @@ function MoneyStat(props) {
                     </div>
                     <div className="stat-title">你今日已經搵咗：</div>
                     <div className="stat-value text-secondary">{showEarnedMoney ? `$ ${animNum}` : `****`}</div>
-                    <div className="stat-desc">/ {showEarnedMoney ? (salary / 22).toFixed(0) : `****`}</div>
+                    <div className="stat-desc">/ {showEarnedMoney ? (salary / 22).toFixed(2) : `****`}</div>
                 </div>
                 <div className="stat place-items-center">
                     <div className="stat-figure text-primary button">
