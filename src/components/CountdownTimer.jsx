@@ -20,6 +20,7 @@ function CountdownTimer(props) {
 
     useEffect(() => {
         const countdownInterval = setInterval(() => {
+            console.log("totalSeconds: ", totalSeconds)
             if (totalSeconds > 0) {
                 setTotalSeconds(totalSeconds - 1);
                 const cur_time = new Date()

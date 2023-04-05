@@ -28,17 +28,17 @@ function InputModal(props) {
         <div>
             <Modal className='w-11/12 max-w-5xl' open={true}>
                 <Modal.Header className="font-bold">
-                    <span className='label-text'>睇下你今日搵幾錢</span>
+                    <span className='label-text text-2xl'>睇下你今日搵幾錢</span>
                 </Modal.Header>
 
                 <Modal.Body>
                     <div className="grid grid-cols-2">
                         <div className="m-2">
-                            幾點返工？
+                            <span className='label-text'>幾點返工？</span>
                             <TimePicker style={{ color: "red", backgroundColor: "red" }} placeholder={"幾點返工？"} onChange={setStartTime} value={startTime} pickerDefaultValue={"09:00"} required={true} />
                         </div>
                         <div className="m-2">
-                            幾點放工？
+                            <span className='label-text'>幾點放工？</span>
                             <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"23:59"} />
                         </div>
                     </div>
