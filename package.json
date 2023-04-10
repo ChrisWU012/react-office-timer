@@ -23,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "sync": "aws s3 sync ./build 's3://time2off.com/'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

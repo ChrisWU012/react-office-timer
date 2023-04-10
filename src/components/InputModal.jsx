@@ -39,11 +39,11 @@ function InputModal(props) {
                     <div className="grid grid-cols-2">
                         <div className="m-2">
                             <span className='label-text'>幾點返工？</span>
-                            <TimePicker style={{ color: "red", backgroundColor: "red" }} placeholder={"幾點返工？"} onChange={setStartTime} value={startTime} pickerDefaultValue={"09:00"} required={true} />
+                            <TimePicker onChange={setStartTime} value={startTime} pickerDefaultValue={"09:00"} required={true} />
                         </div>
                         <div className="m-2">
                             <span className='label-text'>幾點放工？</span>
-                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"13:30"} />
+                            <TimePicker onChange={setEndTime} value={endTime} pickerDefaultValue={"18:30"} required={true} />
                         </div>
                     </div>
                     <div className="flex w-full component-preview p-4 items-center justify-center gap-2 font-sans">
