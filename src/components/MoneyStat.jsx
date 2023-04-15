@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import animateValue from '../hooks/AnimNumber'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeLowVision } from '@fortawesome/free-solid-svg-icons'
-import { Stats, Button } from 'react-daisyui'
 
 function MoneyStat(props) {
     //props: salary, startTime, endTime, currentTime
@@ -59,23 +58,23 @@ function MoneyStat(props) {
     }, [currentTime]);
 
     return (
-        <div className='m-1'>
+        <div className='m-1 mt-0 mb-4'>
             <div className="stats shadow border-double border-2 border-sky-500">
                 <div className="stat place-items-center">
                     <div className="stat-figure text-secondary">
                         {showEarnedMoney ?
-                            <button ><FontAwesomeIcon style={{ width: "34px" }} icon={faEye} onClick={() => setShowEarnedMoney(false)} /></button>
-                            : <button><FontAwesomeIcon style={{ width: "34px" }} icon={faEyeLowVision} onClick={() => setShowEarnedMoney(true)} /></button>}
+                            <button><FontAwesomeIcon className='text-secondary' style={{ width: "34px" }} icon={faEye} onClick={() => setShowEarnedMoney(false)} /></button>
+                            : <button><FontAwesomeIcon className='text-secondary' style={{ width: "34px" }} icon={faEyeLowVision} onClick={() => setShowEarnedMoney(true)} /></button>}
                     </div>
                     <div className="stat-title">你今日已經搵咗：</div>
                     <div className="stat-value text-secondary">{showEarnedMoney ? `$ ${animNum}` : `****`}</div>
                     <div className="stat-desc">/ {showEarnedMoney ? (salary / 22).toFixed(2) : `****`}</div>
                 </div>
                 <div className="stat place-items-center">
-                    <div className="stat-figure text-primary button">
+                    <div className="stat-figure text-primary">
                         {showMinMoney ?
-                            <button><FontAwesomeIcon style={{ width: "34px" }} icon={faEye} onClick={() => setShowMinMoney(false)} /></button>
-                            : <button> <FontAwesomeIcon style={{ width: "34px" }} icon={faEyeLowVision} onClick={() => setShowMinMoney(true)} /></button>}
+                            <button><FontAwesomeIcon className='text-primary' style={{ width: "34px" }} icon={faEye} onClick={() => setShowMinMoney(false)} /></button>
+                            : <button><FontAwesomeIcon className='text-primary' style={{ width: "34px" }} icon={faEyeLowVision} onClick={() => setShowMinMoney(true)} /></button>}
                     </div>
                     <div className="stat-title">每分鐘你搵緊：</div>
                     <div className="stat-value text-primary">{showMinMoney ? `$ ` + (Math.round(salary / 22 * 100) / 100 / (endTime - startTime) * 60).toFixed(2) : `****`}</div>

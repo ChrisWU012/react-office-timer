@@ -8,4 +8,7 @@ module.exports = {
   daisyui: {
     themes: ["night"],
   },
+  corePlugins: {
+    preflight: false,
+  },
 }

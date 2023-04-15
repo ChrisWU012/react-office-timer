@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Confetti from 'react-confetti';
 import { Countdown } from "react-daisyui";
+import useWindowSize from 'react-use/lib/useWindowSize'
+
+import { getCurrentTime } from "../hooks/GetCurrentTime";
 
 //props: endTime, currentTime (HH:MM:SS)
 function CountdownTimer(props) {
@@ -11,6 +14,7 @@ function CountdownTimer(props) {
     const [minutes, setMinutes] = useState(props.mins - mm);
     const [seconds, setSeconds] = useState(props.secs - ss);
     const [showConfetti, setShowConfetti] = useState(false)
+    const { width, height } = useWindowSize()
 
     useEffect(() => {
         var total_seconds = (props.hours - hh) * 60 * 60 + (props.mins - mm) * 60 + (props.secs - ss)
@@ -19,8 +23,8 @@ function CountdownTimer(props) {
     }, []);
 
     useEffect(() => {
+        // console.log("countdownInterval", totalSeconds)
         const countdownInterval = setInterval(() => {
-            console.log("totalSeconds: ", totalSeconds)
             if (totalSeconds > 0) {
                 setTotalSeconds(totalSeconds - 1);
                 const cur_time = new Date()
@@ -54,18 +58,10 @@ function CountdownTimer(props) {
         return () => clearInterval(countdownInterval);
     }, [totalSeconds]);
 
-    function getCurrentTime() {
-        const cur_time = new Date()
-        var curr_hour = cur_time.getHours()
-        var curr_min = cur_time.getMinutes()
-        var curr_sec = cur_time.getSeconds()
-        return [curr_hour, curr_min, curr_sec]
-    }
-
     return (
-        <>
-            <div className="label-text mt-8 text-xl">距離放工時間仲有：</div>
-            <div className="m-24">
+        <div className="w-96" style={{ marginLeft: "auto", marginRight: "auto" }}>
+            <div className="label-text text-xl">距離放工時間仲有：</div>
+            <div className="mt-20 mb-20">
                 <Countdown className="label-text text-8xl" value={hours} />
                 <span className="label-text text-7xl">:</span>
                 <Countdown className="label-text text-8xl" value={minutes} />
@@ -77,13 +73,13 @@ function CountdownTimer(props) {
             </div>
 
             {showConfetti ? <Confetti
-                width={window.innerWidth}
-                height={window.innerHeight}
+                width={width}
+                height={height}
                 recycle={true}
                 numberOfPieces={500}
                 tweenDuration={2000}
             /> : null}
-        </>
+        </div>
 
     );
 }

@@ -1,13 +1,18 @@
 //library
 import React, { useState, useEffect } from 'react'
 import { Button } from 'react-daisyui'
+import { useNavigate } from "react-router-dom";
 
 //component
 import InputModal from '../components/InputModal'
+import FooterComponent from '../components/FooterComponent'
 // import Quotes from '../components/Quotes'
 import CountdownTimer from '../components/CountdownTimer'
 import MoneyStat from '../components/MoneyStat'
 // import NestedThemes from '../components/NestedThemes'
+
+//hooks
+import { getCurrentTime } from '../hooks/GetCurrentTime'
 
 function Home() {
     const [showInput, setShowInput] = useState(false)
@@ -26,9 +31,16 @@ function Home() {
     const [showMoney, setShowMoney] = useState(false)
 
     const [data, setData] = useState({})
+
+    const navigate = useNavigate();
+
+    //init
+    useEffect(() => {
+        navigate("/")
+    }, [])
+
     useEffect(() => {
         if (data) {
-            console.log("data", data)
             if (data.startTime) {
                 setStartTime(data.startTime + ":00")
             }
@@ -63,18 +75,25 @@ function Home() {
     }, [startTime, endTime, salary])
 
     return (
-        <div className='inline-block align-middle'>
-            {/* todo: add themes */}
-            {/* <NestedThemes /> */}
+        <div>
+            <div className=' App-header'>
+                <div className='inline-block align-middle'>
+                    {/* todo: add themes */}
+                    {/* <NestedThemes /> */}
 
-            {showInput ? <InputModal close={setShowInput} getData={setData} /> : null}
-            {showMoney ? <MoneyStat salary={salary} startTime={startTime} endTime={endTime} currentTime={currentTime} /> : null}
-            {showTimer ? <CountdownTimer hours={hours} mins={mins} secs={secs} endTime={endTime} /> :
-                <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>點擊開始</Button>}
+                    {showInput ? <InputModal close={setShowInput} getData={setData} /> : null}
+                    {showMoney ? <MoneyStat salary={salary} startTime={startTime} endTime={endTime} currentTime={currentTime} /> : null}
+                    {showTimer ? <CountdownTimer hours={hours} mins={mins} secs={secs} endTime={endTime} /> :
+                        <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>開始計時</Button>}
+                </div>
+            </div>
 
-
-            {/* <Quotes /> */}
+            <footer>
+                <FooterComponent />
+            </footer>
         </div>
+
+
     )
 }
 
