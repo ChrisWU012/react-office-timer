@@ -36,9 +36,14 @@ function CountdownTimer(props) {
                 let newMinutes = props.mins - curr_min;
                 let newSeconds = props.secs - curr_sec;
 
-                if (newSeconds < 0 && totalSeconds > 1) {
+                if (newSeconds < 0 && totalSeconds >= 1 && (newHours > 0 || newMinutes > 0)) {
                     newSeconds += 60;
                     newMinutes -= 1;
+                } else {
+                    //call end animation
+                    setShowConfetti(true)
+                    clearInterval(countdownInterval);
+                    return () => clearInterval(countdownInterval);
                 }
 
                 if (newMinutes < 0 && newHours > 0) {

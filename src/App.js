@@ -1,6 +1,7 @@
 import Home from './pages/Home';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermOfUse from './pages/TermOfUse';
+import About from './pages/About';
 import HeaderComponent from './components/HeaderComponent';
 import { Routes, Route, Outlet } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-use" element={<TermOfUse />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </div>

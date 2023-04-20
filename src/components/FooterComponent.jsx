@@ -15,6 +15,10 @@ function FooterComponent() {
                 <a href='/' style={{ textDecoration: "none", color: "white" }}><FontAwesomeIcon icon={faHouse} /></a>
             </div>
             <div>
+                <Footer.Title>About</Footer.Title>
+                <a href='/about' style={{ textDecoration: "none", color: "white" }}>About</a>
+            </div>
+            <div>
                 <Footer.Title>Terms of Use</Footer.Title>
                 <a href='/terms-of-use' style={{ textDecoration: "none", color: "white" }}>Rules</a>
             </div>
