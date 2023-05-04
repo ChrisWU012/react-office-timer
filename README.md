@@ -1,6 +1,6 @@
 # React Office Timer
 
-## Objectives
+## Objectives of this project
 
 ### 1. Deployment
 Learn to deploy using AWS. e.g.: Route 53, S3 bucket, Cloudfront.
