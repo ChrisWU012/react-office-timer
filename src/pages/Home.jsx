@@ -1,7 +1,7 @@
 //library
 import React, { useState, useEffect } from 'react'
 import { Button } from 'react-daisyui'
-import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 //component
 import InputModal from '../components/InputModal'
@@ -15,6 +15,7 @@ import MoneyStat from '../components/MoneyStat'
 import { getCurrentTime } from '../hooks/GetCurrentTime'
 
 function Home() {
+    const { t, i18n } = useTranslation();
     const [showInput, setShowInput] = useState(false)
     const [showTimer, setShowTimer] = useState(false)
 
@@ -31,13 +32,6 @@ function Home() {
     const [showMoney, setShowMoney] = useState(false)
 
     const [data, setData] = useState({})
-
-    const navigate = useNavigate();
-
-    //init
-    useEffect(() => {
-        navigate("/")
-    }, [])
 
     useEffect(() => {
         if (data) {
@@ -84,7 +78,7 @@ function Home() {
                     {showInput ? <InputModal close={setShowInput} getData={setData} /> : null}
                     {showMoney ? <MoneyStat salary={salary} startTime={startTime} endTime={endTime} currentTime={currentTime} /> : null}
                     {showTimer ? <CountdownTimer hours={hours} mins={mins} secs={secs} endTime={endTime} /> :
-                        <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>開始計時</Button>}
+                        <Button className='m-1' color={'accent'} onClick={() => setShowInput(!showInput)}>{t(`let's start`)}</Button>}
                 </div>
             </div>
 

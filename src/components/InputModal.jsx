@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Modal, Button, Input } from 'react-daisyui'
 import { TimePicker } from 'react-ios-time-picker';
+import { useTranslation } from 'react-i18next';
 
 function InputModal(props) {
     const [startTime, setStartTime] = useState()
     const [endTime, setEndTime] = useState()
     const [salary, setSalary] = useState()
+
+    const { t } = useTranslation();
 
     const onClose = () => {
         const cur_time = new Date()
@@ -32,7 +35,7 @@ function InputModal(props) {
         <div>
             <Modal className='w-11/12 max-w-5xl' open={true}>
                 <Modal.Header className="font-bold">
-                    <span className='label-text text-2xl'>睇下你今日搵幾錢</span>
+                    <span className='label-text text-2xl'>{t(`input-title`)}</span>
                 </Modal.Header>
 
                 <Modal.Body>

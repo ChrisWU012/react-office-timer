@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
 import Confetti from 'react-confetti';
 import { Countdown } from "react-daisyui";
 import useWindowSize from 'react-use/lib/useWindowSize'
@@ -14,19 +14,28 @@ function CountdownTimer(props) {
     const [minutes, setMinutes] = useState(props.mins - mm);
     const [seconds, setSeconds] = useState(props.secs - ss);
     const [showConfetti, setShowConfetti] = useState(false)
-    const { width, height } = useWindowSize()
+
+    const ref = useRef(null);
+
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+
+    useLayoutEffect(() => {
+        setWidth(ref.current.parentElement.parentElement.parentElement.offsetWidth);
+        setHeight(ref.current.parentElement.parentElement.parentElement.offsetHeight);
+        console.log("ref.current: ", ref.current.parentElement.parentElement.parentElement)
+    }, []);
+
+
 
     useEffect(() => {
         var total_seconds = (props.hours - hh) * 60 * 60 + (props.mins - mm) * 60 + (props.secs - ss)
         setTotalSeconds(total_seconds);
-        // setHours
     }, []);
 
     useEffect(() => {
-        // console.log("countdownInterval", totalSeconds)
         const countdownInterval = setInterval(() => {
             if (totalSeconds > 0) {
-                setTotalSeconds(totalSeconds - 1);
                 const cur_time = new Date()
                 var curr_hour = cur_time.getHours()
                 var curr_min = cur_time.getMinutes()
@@ -39,11 +48,6 @@ function CountdownTimer(props) {
                 if (newSeconds < 0 && totalSeconds >= 1 && (newHours > 0 || newMinutes > 0)) {
                     newSeconds += 60;
                     newMinutes -= 1;
-                } else {
-                    //call end animation
-                    setShowConfetti(true)
-                    clearInterval(countdownInterval);
-                    return () => clearInterval(countdownInterval);
                 }
 
                 if (newMinutes < 0 && newHours > 0) {
@@ -54,6 +58,8 @@ function CountdownTimer(props) {
                 setHours(newHours);
                 setMinutes(newMinutes);
                 setSeconds(newSeconds);
+                var total_seconds = newHours * 3600 + newMinutes * 60 + newSeconds
+                setTotalSeconds(total_seconds);
             } else {
                 //call end animation
                 setShowConfetti(true)
@@ -84,6 +90,12 @@ function CountdownTimer(props) {
                 numberOfPieces={500}
                 tweenDuration={2000}
             /> : null}
+
+            <div ref={ref}>
+                <h2>Width: {width}</h2>
+
+                <h2>Height: {height}</h2>
+            </div>
         </div>
 
     );
