@@ -1,12 +1,14 @@
 # React Office Timer
 
-## Objectives
+## Objectives of this project
 
-### CI/CD
-Learn to deploy using Docker so as to improve the efficiency, portability, scalability, and security of application development and deployment.
+### 1. Deployment
+Learn to deploy using AWS. e.g.: Route 53, S3 bucket, Cloudfront.
 
-### Integration with Google Adsense
+### 2. Integration with Google Adsense
 Learn to make use of Advertiser Network
 
-### Help employees work efficiently
-This countdown timers aims to help employees make a good time management. I help you people can be productive and meet your targets!
+### 3. Help employees work efficiently
+This countdown timers aims to help employees make a good time management. I hope you people can be productive and meet your targets!
+
+*Website: https://time2off.com/*
