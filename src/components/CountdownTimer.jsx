@@ -1,12 +1,13 @@
 import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
 import Confetti from 'react-confetti';
 import { Countdown } from "react-daisyui";
-import useWindowSize from 'react-use/lib/useWindowSize'
+import { useTranslation } from 'react-i18next';
 
 import { getCurrentTime } from "../hooks/GetCurrentTime";
 
 //props: endTime, currentTime (HH:MM:SS)
 function CountdownTimer(props) {
+    const { t } = useTranslation();
     var [hh, mm, ss] = getCurrentTime()
     const [totalSeconds, setTotalSeconds] = useState(0);
 
@@ -23,7 +24,6 @@ function CountdownTimer(props) {
     useLayoutEffect(() => {
         setWidth(ref.current.parentElement.parentElement.parentElement.offsetWidth);
         setHeight(ref.current.parentElement.parentElement.parentElement.offsetHeight);
-        console.log("ref.current: ", ref.current.parentElement.parentElement.parentElement)
     }, []);
 
 
@@ -70,8 +70,8 @@ function CountdownTimer(props) {
     }, [totalSeconds]);
 
     return (
-        <div className="w-96" style={{ marginLeft: "auto", marginRight: "auto" }}>
-            <div className="label-text text-xl">距離放工時間仲有：</div>
+        <div className="w-96" style={{ marginLeft: "auto", marginRight: "auto" }} ref={ref}>
+            <div className="label-text text-xl">  {t("time left")}</div>
             <div className="mt-20 mb-20">
                 <Countdown className="label-text text-8xl" value={hours} />
                 <span className="label-text text-7xl">:</span>
@@ -80,7 +80,7 @@ function CountdownTimer(props) {
                 <Countdown className="label-text text-8xl" value={seconds} />
             </div>
             <div >
-                <h1 className="label-text" >今日放工時間：<span className="text-accent text-2xl">{props.endTime}</span></h1>
+                <h1 className="label-text" >{t("time to off")}<span className="text-accent text-2xl">{props.endTime}</span></h1>
             </div>
 
             {showConfetti ? <Confetti
@@ -90,12 +90,6 @@ function CountdownTimer(props) {
                 numberOfPieces={500}
                 tweenDuration={2000}
             /> : null}
-
-            <div ref={ref}>
-                <h2>Width: {width}</h2>
-
-                <h2>Height: {height}</h2>
-            </div>
         </div>
 
     );
